@@ -1,18 +1,29 @@
-name: Cargo Build & Test
+name: CI
 
-on:
-  pull_request:
+on: [pull_request]
 
 env:
-  CARGO_TERM_COLOR: always
+  CLICOLOR_FORCE: 1
 
 jobs:
-  build_and_test:
-    name: Rust project - latest
+  ci:
+    name: CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: rustup update stable && rustup default stable
-      - run: cargo build --verbose
-      - run: cargo test --verbose
-      - run: cargo fmt --verbose
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+      - name: Install cargo-make
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: --debug cargo-make
+      - name: Run CI
+        uses: actions-rs/cargo@v1
+        with:
+          command: make
+          args: ci
