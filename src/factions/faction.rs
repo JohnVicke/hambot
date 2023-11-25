@@ -1,5 +1,5 @@
 pub enum FactionType {
-    BandleCity,
+    BundleCity,
     Bilgewater,
     Demacia,
     Freljord,
@@ -14,19 +14,63 @@ pub enum FactionType {
     Zaun,
 }
 
+impl FactionType {
+    pub fn to_string(&self) -> &'static str {
+        match self {
+            FactionType::BundleCity => "Bundle City",
+            FactionType::Bilgewater => "Bilgewater",
+            FactionType::Demacia => "Demacia",
+            FactionType::Freljord => "Freljord",
+            FactionType::Ionia => "Ionia",
+            FactionType::Ixtal => "Ixtal",
+            FactionType::Noxus => "Noxus",
+            FactionType::Piltover => "Piltover",
+            FactionType::ShadowIsles => "Shadow Isles",
+            FactionType::Shurima => "Shurima",
+            FactionType::Targon => "Targon",
+            FactionType::Void => "Void",
+            FactionType::Zaun => "Zaun",
+        }
+    }
+}
+
 pub struct Faction {
-    name: FactionType,
-    challenge: String,
-    champions: Vec<Champion>,
+    pub name: FactionType,
+    pub challenge: String,
+    pub champions: Vec<Champion>,
+}
+
+impl Faction {
+    pub fn to_markdown(&self) -> String {
+        let champions = self
+            .champions
+            .iter()
+            .map(|champion| format!("`{}`", champion.to_string()))
+            .collect::<Vec<_>>()
+            .join(" , ");
+
+        return format!(
+            "## {} \n### *{}*\n {}",
+            self.name.to_string(),
+            self.challenge,
+            champions
+        );
+    }
 }
 
 pub struct Champion {
-    name: String,
+    pub name: String,
 }
 
-pub fn bandle_city() -> Faction {
+impl Champion {
+    pub fn to_string(&self) -> &str {
+        return &self.name;
+    }
+}
+
+pub fn bundle_city() -> Faction {
     Faction {
-        name: FactionType::BandleCity,
+        name: FactionType::BundleCity,
         challenge: String::from("5 under 5"),
         champions: vec![
             Champion {
@@ -78,7 +122,7 @@ pub fn bandle_city() -> Faction {
     }
 }
 
-pub fn Bilgewater() -> Faction {
+pub fn bilgewater() -> Faction {
     Faction {
         name: FactionType::Bilgewater,
         challenge: String::from("All Hands on Deck"),
@@ -117,9 +161,9 @@ pub fn Bilgewater() -> Faction {
     }
 }
 
-pub fn Demacia() -> Faction {
+pub fn demacia() -> Faction {
     Faction {
-        name: FactionType::Bilgewater,
+        name: FactionType::Demacia,
         challenge: String::from("Demacia"),
         champions: vec![
             Champion {
@@ -171,7 +215,7 @@ pub fn Demacia() -> Faction {
     }
 }
 
-pub fn Freljord() -> Faction {
+pub fn freljord() -> Faction {
     Faction {
         name: FactionType::Freljord,
         challenge: String::from("Ice, Ice, Baby"),
@@ -222,7 +266,7 @@ pub fn Freljord() -> Faction {
     }
 }
 
-pub fn Ionia() -> Faction {
+pub fn ionia() -> Faction {
     Faction {
         name: FactionType::Ionia,
         challenge: String::from("Everybody was Wuju Fighting"),
@@ -294,7 +338,7 @@ pub fn Ionia() -> Faction {
     }
 }
 
-pub fn Ixtal() -> Faction {
+pub fn ixtal() -> Faction {
     Faction {
         name: FactionType::Ixtal,
         challenge: String::from("Elemental, My Dear Watson"),
@@ -324,7 +368,7 @@ pub fn Ixtal() -> Faction {
     }
 }
 
-pub fn Noxus() -> Faction {
+pub fn noxus() -> Faction {
     Faction {
         name: FactionType::Noxus,
         challenge: String::from("Strength Above All"),

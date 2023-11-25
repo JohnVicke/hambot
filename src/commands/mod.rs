@@ -1,1 +1,1 @@
-pub mod globetrobe;
+pub mod random_faction;
