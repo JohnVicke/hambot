@@ -1,3 +1,6 @@
+mod commands;
+mod factions;
+
 use anyhow::Context as _;
 use poise::serenity_prelude as serenity;
 use shuttle_poise::ShuttlePoise;

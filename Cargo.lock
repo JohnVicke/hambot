@@ -670,6 +670,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "poise",
+ "rand",
  "shuttle-poise",
  "shuttle-runtime",
  "shuttle-secrets",
