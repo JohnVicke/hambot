@@ -34,7 +34,7 @@ cargo install cargo-shuttle
 ```
 
 ### cargo-make
-This project uses (cargo-make)[https://sagiegurari.github.io/cargo-make/#installation] as task runner
+This project uses [cargo-make](https://sagiegurari.github.io/cargo-make/#installation) as task runner
 
 Install:
 ```
