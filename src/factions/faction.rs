@@ -644,7 +644,7 @@ pub fn zaun() -> Faction {
                 name: String::from("Blitzcrank"),
             },
             Champion {
-                name: String::from("Dr. Mundo}}"),
+                name: String::from("Dr. Mundo"),
             },
             Champion {
                 name: String::from("Ekko"),
