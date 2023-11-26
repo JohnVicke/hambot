@@ -1,5 +1,5 @@
 pub enum FactionType {
-    BundleCity,
+    BandleCity,
     Bilgewater,
     Demacia,
     Freljord,
@@ -17,7 +17,7 @@ pub enum FactionType {
 impl FactionType {
     pub fn to_string(&self) -> &'static str {
         match self {
-            FactionType::BundleCity => "Bundle City",
+            FactionType::BandleCity => "Bandle City",
             FactionType::Bilgewater => "Bilgewater",
             FactionType::Demacia => "Demacia",
             FactionType::Freljord => "Freljord",
@@ -35,31 +35,36 @@ impl FactionType {
 }
 
 pub struct Faction {
-    pub name: FactionType,
-    pub challenge: String,
-    pub champions: Vec<Champion>,
+    name: FactionType,
+    img_url: String,
+    challenge: String,
+    champions: Vec<Champion>,
 }
 
 impl Faction {
-    pub fn to_markdown(&self) -> String {
-        let champions = self
-            .champions
-            .iter()
-            .map(|champion| format!("`{}`", champion.to_string()))
-            .collect::<Vec<_>>()
-            .join(" , ");
-
-        return format!(
-            "## {} \n### *{}*\n {}",
-            self.name.to_string(),
-            self.challenge,
-            champions
-        );
+    pub fn challenge(&self) -> &str {
+        return &self.challenge;
+    }
+    pub fn name(&self) -> &str {
+        return self.name.to_string();
+    }
+    pub fn img_url(&self) -> &str {
+        return &self.img_url;
+    }
+    pub fn champions_content(&self) -> String {
+        format!(
+            "{}",
+            self.champions
+                .iter()
+                .map(|champion| format!("- `{}`", champion.to_string()))
+                .collect::<Vec<_>>()
+                .join("\n")
+        )
     }
 }
 
 pub struct Champion {
-    pub name: String,
+    name: String,
 }
 
 impl Champion {
@@ -68,10 +73,11 @@ impl Champion {
     }
 }
 
-pub fn bundle_city() -> Faction {
+pub fn bandle_city() -> Faction {
     Faction {
-        name: FactionType::BundleCity,
+        name: FactionType::BandleCity,
         challenge: String::from("5 under 5"),
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/6/68/Bandle_City_Crest.png/revision/latest?cb=20190415230719"),
         champions: vec![
             Champion {
                 name: String::from("Corki"),
@@ -125,6 +131,7 @@ pub fn bundle_city() -> Faction {
 pub fn bilgewater() -> Faction {
     Faction {
         name: FactionType::Bilgewater,
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/0/06/Bilgewater_Crest.png/revision/latest?cb=20161117042614"),
         challenge: String::from("All Hands on Deck"),
         champions: vec![
             Champion {
@@ -164,6 +171,7 @@ pub fn bilgewater() -> Faction {
 pub fn demacia() -> Faction {
     Faction {
         name: FactionType::Demacia,
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/0/04/Demacia_Crest.png/revision/latest?cb=20180116201503"),
         challenge: String::from("Demacia"),
         champions: vec![
             Champion {
@@ -218,6 +226,7 @@ pub fn demacia() -> Faction {
 pub fn freljord() -> Faction {
     Faction {
         name: FactionType::Freljord,
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/0/0d/Freljord_crest.png/revision/latest?cb=20161117021436"),
         challenge: String::from("Ice, Ice, Baby"),
         champions: vec![
             Champion {
@@ -269,6 +278,7 @@ pub fn freljord() -> Faction {
 pub fn ionia() -> Faction {
     Faction {
         name: FactionType::Ionia,
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/a/ae/Ionia_Crest.png/revision/latest?cb=20161117020756"),
         challenge: String::from("Everybody was Wuju Fighting"),
         champions: vec![
             Champion {
@@ -340,6 +350,7 @@ pub fn ionia() -> Faction {
 
 pub fn ixtal() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/d/df/Ixtal_Crest.png/revision/latest/scale-to-width-down/1000?cb=20190613153702"),
         name: FactionType::Ixtal,
         challenge: String::from("Elemental, My Dear Watson"),
         champions: vec![
@@ -370,6 +381,7 @@ pub fn ixtal() -> Faction {
 
 pub fn noxus() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/e/e9/Noxus_Crest.png/revision/latest?cb=20161117055949"),
         name: FactionType::Noxus,
         challenge: String::from("Strength Above All"),
         champions: vec![
@@ -421,6 +433,7 @@ pub fn noxus() -> Faction {
 
 pub fn piltover() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/c/c6/Piltover_Crest.png/revision/latest?cb=20161117163225"),
         name: FactionType::Piltover,
         challenge: String::from("Calculated"),
         champions: vec![
@@ -457,6 +470,7 @@ pub fn piltover() -> Faction {
 
 pub fn shadow_isles() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/e/e6/Shadow_Isles_LoR_Region.png/revision/latest?cb=20210827234448"),
         name: FactionType::ShadowIsles,
         challenge: String::from("Spooky Scary Skeletons"),
         champions: vec![
@@ -502,6 +516,7 @@ pub fn shadow_isles() -> Faction {
 
 pub fn shurima() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/6/66/Shuriman_Crest.png/revision/latest?cb=20161117023625"),
         name: FactionType::Shurima,
         challenge: String::from("The Sun Disc Never Sets"),
         champions: vec![
@@ -550,6 +565,7 @@ pub fn shurima() -> Faction {
 
 pub fn targon() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/c/c6/Targon_Crest.png/revision/latest?cb=20161117025619"),
         name: FactionType::Targon,
         challenge: String::from("Peak Performance"),
         champions: vec![
@@ -583,6 +599,7 @@ pub fn targon() -> Faction {
 
 pub fn void() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/c/cb/Void_Crest.png/revision/latest?cb=20180801201707"),
         name: FactionType::Void,
         challenge: String::from("Inhuman Screeching Sounds"),
         champions: vec![
@@ -619,6 +636,7 @@ pub fn void() -> Faction {
 
 pub fn zaun() -> Faction {
     Faction {
+        img_url: String::from("https://static.wikia.nocookie.net/leagueoflegends/images/b/bc/Zaun_Crest.png/revision/latest?cb=20180116201441"),
         name: FactionType::Zaun,
         challenge: String::from("Chemtech Comrades"),
         champions: vec![
