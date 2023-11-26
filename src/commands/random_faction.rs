@@ -1,6 +1,8 @@
+use crate::{Context, Error};
+
 use crate::{
     factions::faction::{
-        bilgewater, bundle_city, demacia, freljord, ionia, ixtal, noxus, piltover, shadow_isles,
+        bandle_city, bilgewater, demacia, freljord, ionia, ixtal, noxus, piltover, shadow_isles,
         shurima, targon, void, zaun, Faction,
     },
     utils::random,
@@ -8,7 +10,7 @@ use crate::{
 
 const FACTIONS: [fn() -> Faction; 15] = [
     bilgewater,
-    bundle_city,
+    bandle_city,
     demacia,
     freljord,
     ionia,
@@ -24,7 +26,22 @@ const FACTIONS: [fn() -> Faction; 15] = [
     shurima,
 ];
 
-pub fn random_faction() -> Faction {
+#[poise::command(slash_command)]
+pub async fn random_faction(ctx: Context<'_>) -> Result<(), Error> {
     let random = random::random_number(FACTIONS.len() as u32);
-    return FACTIONS[random as usize]();
+    let faction = FACTIONS[random as usize]();
+
+    ctx.send(|reply| {
+        reply.embed(|embed| {
+            embed.title(faction.name()).image(faction.img_url()).field(
+                "Challenge",
+                faction.challenge(),
+                true,
+            )
+        });
+        reply.content(faction.champions_content())
+    })
+    .await?;
+
+    Ok(())
 }
