@@ -11,6 +11,7 @@ try {
   console.log("Successfully registered commands");
 } catch (e) {
   console.error(e);
+  process.exit(1);
 }
 
 try {

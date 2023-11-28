@@ -1,24 +1,30 @@
-import {
-  ChatInputCommandInteraction,
-  Collection,
-  SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
-interface SlashCommandOptions {
-  name: string;
+import { Context } from "../client";
+
+interface SlashCommandOptions<TName extends string> {
+  name: TName;
   description: string;
-  execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
+  command?: SlashCommandBuilder;
+  execute: (
+    ctx: { interaction: ChatInputCommandInteraction } & Context,
+  ) => Promise<void>;
 }
 
-export function createSlashCommand(options: SlashCommandOptions) {
+export function createSlashCommand<const TName extends string>(
+  options: SlashCommandOptions<TName>,
+) {
   const slashCommand = {
-    command: new SlashCommandBuilder()
-      .setName(options.name)
-      .setDescription(options.description),
+    command:
+      options.command ??
+      new SlashCommandBuilder()
+        .setName(options.name)
+        .setDescription(options.description),
     execute: options.execute,
-    register: (collection: Collection<unknown, unknown>) => {
-      collection.set(options.name, slashCommand.command);
+    get name() {
+      return options.name;
     },
+    register: () => slashCommand.command.toJSON(),
   };
 
   return slashCommand;
