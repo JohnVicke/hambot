@@ -1,8 +1,14 @@
-name: Label PR and check title
+name: Lint PR
 
 on:
   pull_request_target:
-    branches: ["*"]
+    types:
+      - opened
+      - edited
+      - synchronize
+
+permissions:
+  pull-requests: read
 
 jobs:
   lint-pr-title:
