@@ -9,7 +9,7 @@ export function CopyInviteLink() {
   const { copy, copied } = useCopyToClipboard();
   const mutation = api.auth.inviteLink.useMutation();
 
-  const copyOrGenerate = async () => {
+  const copyOrGenerate = () => {
     if (!mutation.data) {
       mutation.mutate();
       return;

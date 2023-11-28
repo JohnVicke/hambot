@@ -1,12 +1,11 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import {
-  getServerSession,
-  type DefaultSession,
-  type NextAuthOptions,
-} from "next-auth";
-import DiscordProvider, { DiscordProfile } from "next-auth/providers/discord";
+import { getServerSession } from "next-auth";
+import type { DefaultSession, NextAuthOptions } from "next-auth";
+import type { DiscordProfile } from "next-auth/providers/discord";
+import DiscordProvider from "next-auth/providers/discord";
 
-import { db, type DbUser } from "@ham/db";
+import { db } from "@ham/db";
+import type { DbUser } from "@ham/db";
 
 import { env } from "~/env";
 import { discordCDN } from "~/lib/discord-cdn";
@@ -33,7 +32,7 @@ export const authOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
-      profile: async (profile: DiscordProfile) =>
+      profile: (profile: DiscordProfile) =>
         ({
           ...profile,
           image: discordCDN().avatar({
