@@ -1,0 +1,25 @@
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+[tasks.format]
+install_crate ="rustfmt"
+command = "cargo"
+args = ["fmt", "--", "--emit=files"]
+
+[tasks.test]
+command = "cargo"
+args = ["test"]
+dependencies = ["clean"]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+dependencies = ["clean"]
+
+[tasks.ci]
+dependencies = ["format", "build", "test"]
+
+[tasks.run]
+command = "cargo"
+args = ["shuttle", "run"]
