@@ -1,0 +1,26 @@
+name: Fly Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Bot has changes?
+        id: changedAction
+        uses: Trampoline-CX/action-turbo-changed@v1
+        with:
+          workspace: "@ham/annie"
+          from: HEAD^1
+      - name: Deploy fly
+        if: steps.changedAction.outputs.changed == 'true'
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

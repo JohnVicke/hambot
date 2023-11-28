@@ -1,29 +1,57 @@
 name: CI
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: ["*"]
+  push:
+    branches: ["main"]
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow}}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/head/master' }}
 
 env:
-  CLICOLOR_FORCE: 1
+  FORCE_COLOR: 3
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TRUBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  ci:
-    name: CI
+  lint:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./tooking/github/setup
+
+      - name: Copy env
+        shell: bash
+        run: cat .env.example > .env
+
+      - name: Lint
+        run: pnpm lint && pnpm lint:ws
+
+  format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
-      - name: Install cargo-make
-        uses: actions-rs/cargo@v1
-        with:
-          command: install
-          args: --debug cargo-make
-      - name: Run CI
-        uses: actions-rs/cargo@v1
-        with:
-          command: make
-          args: ci
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Format
+        run: pnpm format
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Typecheck
+        run: turbo typecheck
+
+
