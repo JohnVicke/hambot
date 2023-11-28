@@ -67,7 +67,7 @@ export function hambot(options: HambotOptions) {
       });
     },
     start: () => {
-      client.login(options.token);
+      void client.login(options.token);
     },
   };
 }
