@@ -1,0 +1,31 @@
+{
+  "name": "@hb/core",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "git clean -xdf node_modules",
+    "blitz:dev": "cargo make run",
+    "ryze:dev": "turbo run dev --scope=@hb/ryze",
+    "db:push": "pnpm -F db run push",
+    "db:studio": "pnpm -F db studio",
+    "format": "turbo format --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location node_modules/.cache/.prettiercache",
+    "lint": "turbo lint --continue -- --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+    "lint:ws": "pnpm dlx sherif@latest",
+    "typecheck": "turbo typecheck"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 18.18.2"
+  },
+  "devDependencies": {
+    "@ham/prettier-config": "workspace:^0.1.0",
+    "prettier": "^3.1.0",
+    "turbo": "^1.10.16",
+    "typescript": "^5.2.2"
+  },
+  "packageManager": "pnpm@8.11.0",
+  "dependencies": {
+    "turbo": "^1.10.16"
+  }
+}
