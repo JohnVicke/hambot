@@ -1,15 +1,15 @@
-"🌐area: web":
+"🌐 web":
   - any: ["apps/ryze/**/*"]
 
-"🤖area: bot":
+"🤖 bot":
   - any: ["apps/annie/**/*"]
 
-"🔄 area: ci":
+"🔄  ci":
   - any: [".github/**/*"]
 
-"🗃️ area: db":
+"🗃️  db":
   - any: ["packages/db/**/*"]
 
-"🛠️ area: tooling":
+"🛠️  tooling":
   - any: ["tooling/**/*"]
 
