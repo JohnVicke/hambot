@@ -1,5 +1,5 @@
-import { FactionType  } from "./types";
-import type {Faction} from "./types";
+import { FactionType } from "./types";
+import type { Faction } from "./types";
 
 export const bandleCity = {
   name: FactionType.BandleCity,

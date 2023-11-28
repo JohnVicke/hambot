@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 
-export default defineConfig((opts) => ({
+export default defineConfig({
   entry: ["src/index.ts"],
   format: ["esm"],
   splitting: false,
@@ -8,4 +8,4 @@ export default defineConfig((opts) => ({
   clean: true,
   bundle: true,
   dts: true,
-}));
+});

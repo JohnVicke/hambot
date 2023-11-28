@@ -21,7 +21,7 @@ function getFactionEmbed(faction: Faction) {
 export const randomFactionCommand = createSlashCommand({
   name: "random-faction",
   description: "Get a random globe-trotter faction!",
-  execute: async ({ interaction, db }) => {
+  execute: async ({ interaction }) => {
     const faction = getRandomFaction();
     console.log(faction);
     await interaction.reply({ embeds: [getFactionEmbed(faction)] });

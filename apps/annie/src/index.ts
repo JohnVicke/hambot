@@ -3,7 +3,12 @@ import http from "http";
 import { hambot } from "./client";
 import { env } from "./env";
 
-const server = http.createServer((_req, res) => {
+const server = http.createServer((req, res) => {
+  if (req.url === "/healthcheck") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Im alive");
+    return;
+  }
   res.writeHead(200, { "Content-Type": "text/plain" });
   res.end("ok");
 });
