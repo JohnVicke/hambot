@@ -1,0 +1,40 @@
+{
+  "name": "@ham/db",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "push": "drizzle-kit push:sqlite",
+    "studio": "drizzle-kit studio"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@libsql/client": "0.4.0-pre.2",
+    "drizzle-orm": "^0.29.0",
+    "next-auth": "^4.24.5"
+  },
+  "devDependencies": {
+    "@ham/eslint-config": "workspace:^0.1.0",
+    "@ham/prettier-config": "workspace:^0.1.0",
+    "@ham/tsconfig": "workspace:^0.1.0",
+    "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
+    "drizzle-kit": "^0.20.6",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.1.6"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@ham/eslint-config/base"
+    ]
+  },
+  "prettier": "@ham/prettier-config"
+}
