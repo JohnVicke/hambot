@@ -4,12 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "clean": "rm -rf .next .turbo node_modules",
+    "build": "SKIP_ENV_VALIDATION=true next build",
     "dev": "pnpm with-env next dev",
-    "lint": "next lint",
+    "lint": "SKIP_ENV_VALIDATION=true next lint",
     "start": "next start",
     "format": "prettier --write src",
-    "with-env": "dotenv-cli -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@ham/db": "workspace:^0.1.0",
@@ -59,7 +60,7 @@
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwindcss": "^3.3.5",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "root": true,

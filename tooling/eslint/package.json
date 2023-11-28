@@ -15,9 +15,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@next/eslint-plugin-next": "^14.0.2",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
+    "@next/eslint-plugin-next": "^14.0.3",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-turbo": "^1.10.16",
     "eslint-plugin-import": "^2.29.0",
@@ -29,7 +29,7 @@
     "@types/eslint": "^8.44.7",
     "@ham/prettier-config": "workspace:^0.1.0",
     "@ham/tsconfig": "workspace:^0.1.0",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {

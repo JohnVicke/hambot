@@ -1,9 +1,17 @@
 {
   "name": "@ham/db",
   "version": "0.1.0",
+  "private": true,
   "description": "",
   "main": "dist/index.mjs",
   "types": "dist/index.d.mts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf .turbo node_modules",
@@ -28,7 +36,7 @@
     "eslint": "^8.54.0",
     "prettier": "^3.1.0",
     "tsup": "^8.0.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "root": true,

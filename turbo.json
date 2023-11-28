@@ -4,9 +4,13 @@
     "topo": {
       "dependsOn": ["^topo"]
     },
+    "start": {
+      "dependsOn": ["build"]
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
+        ".dist/**",
         ".next/**",
         "!.next/cache/**",
         "next-env.d.ts",
@@ -36,9 +40,6 @@
       "cache": false
     },
     "clean": {
-      "cache": false
-    },
-    "//#clean": {
       "cache": false
     }
   }

@@ -1,9 +1,12 @@
 {
   "name": "@hb/core",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "clean": "git clean -xdf node_modules",
-    "blitz:dev": "cargo make run",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "clean": "turbo run clean",
     "ryze:dev": "turbo run dev --scope=@hb/ryze",
     "db:push": "pnpm -F db run push",
     "db:studio": "pnpm -F db studio",
@@ -24,8 +27,5 @@
     "turbo": "^1.10.16",
     "typescript": "^5.2.2"
   },
-  "packageManager": "pnpm@8.11.0",
-  "dependencies": {
-    "turbo": "^1.10.16"
-  }
+  "packageManager": "pnpm@8.11.0"
 }
