@@ -14,9 +14,9 @@ export enum FactionType {
   Zaun = "Zaun",
 }
 
-export type Faction = {
+export interface Faction {
   name: FactionType;
   imgUrl: string;
   challenge: string;
   champions: string[];
-};
+}

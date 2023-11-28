@@ -1,6 +1,7 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import type { ChatInputCommandInteraction} from "discord.js";
+import { SlashCommandBuilder } from "discord.js";
 
-import { Context } from "../client";
+import type { Context } from "../client/context";
 
 interface SlashCommandOptions<TName extends string> {
   name: TName;
@@ -23,6 +24,9 @@ export function createSlashCommand<const TName extends string>(
     execute: options.execute,
     get name() {
       return options.name;
+    },
+    get description() {
+      return options.description;
     },
     register: () => slashCommand.command.toJSON(),
   };

@@ -10,6 +10,7 @@ import {
 import { db } from "@ham/db";
 
 import * as commands from "../commands";
+import { createContext } from "./context";
 
 type HamCommand = (typeof commands)[keyof typeof commands];
 type HamCommandName = HamCommand["name"];
@@ -19,16 +20,12 @@ interface HambotOptions {
   clientId: string;
 }
 
-const ctx = {
-  db,
-} as const;
-
-export type Context = typeof ctx;
-
 export function hambot(options: HambotOptions) {
   const rest = new REST({ version: "10" }).setToken(options.token);
   const client = new Client({ intents: [GatewayIntentBits.Guilds] });
   const slashCommands = new Collection<HamCommandName, HamCommand>();
+
+  const ctx = createContext({ db });
 
   for (const command of Object.values(commands)) {
     slashCommands.set(command.name, command);
@@ -61,9 +58,9 @@ export function hambot(options: HambotOptions) {
   return {
     refreshCommands: async () => {
       console.info("\n--- Refreshing commands --- ");
-      slashCommands.forEach((command) => {
-        console.info(`Refreshing command ${command.name}`);
-      });
+      for (const command of slashCommands.values()) {
+        console.info(`${command.name} - ${command.description}`);
+      }
       console.log("----------------------------\n");
       return rest.put(Routes.applicationCommands(options.clientId), {
         body: slashCommands.map((command) => command.register()),

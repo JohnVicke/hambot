@@ -2,7 +2,7 @@ import { EmbedBuilder } from "discord.js";
 
 import { createSlashCommand } from "../create-slash-command";
 import { getRandomFaction } from "./get-random-faction";
-import { Faction } from "./types";
+import type { Faction } from "./types";
 
 function getFactionEmbed(faction: Faction) {
   return new EmbedBuilder()
