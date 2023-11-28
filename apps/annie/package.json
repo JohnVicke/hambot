@@ -1,0 +1,41 @@
+{
+  "name": "@ham/annie",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "dev": "pnpm with-env tsup src/index.ts --watch",
+    "build": "tsup src/index.ts",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ham/db": "workspace:^0.1.0",
+    "discord.js": "^14.14.1"
+  },
+  "devDependencies": {
+    "@ham/eslint-config": "workspace:^0.1.0",
+    "@ham/prettier-config": "workspace:^0.1.0",
+    "@ham/tsconfig": "workspace:^0.1.0",
+    "dotenv-cli": "^7.3.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.1.6"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@ham/eslint-config/base",
+      "@ham/eslint-config/nextjs",
+      "@ham/eslint-config/react"
+    ]
+  },
+  "prettier": "@ham/prettier-config",
+  "packageManager": "pnpm@8.8.0"
+}
