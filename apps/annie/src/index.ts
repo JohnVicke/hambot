@@ -1,9 +1,16 @@
+import { db } from "@ham/db";
+
 import { hambotApp } from "./app";
 import { env } from "./env";
+import { createLogger } from "./logger";
+
+const logger = createLogger();
 
 const app = hambotApp({
   discordToken: env.DISCORD_TOKEN,
   discordClientId: env.DISCORD_CLIENT_ID,
+  logger,
+  db,
 });
 
 try {
