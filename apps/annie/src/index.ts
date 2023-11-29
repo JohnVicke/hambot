@@ -1,5 +1,3 @@
-import http from "http";
-
 import { hambotApp } from "./app";
 import { env } from "./env";
 
