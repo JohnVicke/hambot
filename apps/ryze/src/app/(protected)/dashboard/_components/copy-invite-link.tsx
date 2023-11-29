@@ -2,11 +2,11 @@
 
 import { Check, Copy, Wrench } from "lucide-react";
 
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { useCopyToClipboard } from "~/hooks/use-copy-to-clipboard";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 
 export function CopyInviteLink() {
   const { copy, copied } = useCopyToClipboard();

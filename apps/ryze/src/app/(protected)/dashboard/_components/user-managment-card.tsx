@@ -1,5 +1,14 @@
 import { ShieldCheck } from "lucide-react";
 
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { Separator } from "~/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
@@ -7,15 +16,6 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { api } from "~/trpc/server";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Separator } from "../ui/separator";
 import { CopyInviteLink } from "./copy-invite-link";
 
 export async function UserManagmentCard(props: { className?: string }) {
