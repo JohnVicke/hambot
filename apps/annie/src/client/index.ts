@@ -9,7 +9,7 @@ import {
 
 import { schema } from "@ham/db";
 
-import * as commands from "../commands";
+import * as commands from "./commands";
 import type { Context } from "./context";
 
 type HamCommand = (typeof commands)[keyof typeof commands];
