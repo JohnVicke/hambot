@@ -1,0 +1,44 @@
+{
+  "name": "@ham/ws",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    "./client": {
+      "import": "./dist/client/index.mjs",
+      "types": "./dist/client/index.d.mts"
+    },
+    "./server": {
+      "import": "./dist/server/index.mjs",
+      "types": "./dist/server/index.d.mts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "format": "prettier --check . --ignore-path ../../.gitignore"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "@ham/eslint-config": "workspace:^0.1.0",
+    "@ham/prettier-config": "workspace:^0.1.0",
+    "@ham/tsconfig": "workspace:^0.1.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@ham/eslint-config/base"
+    ]
+  },
+  "prettier": "@ham/prettier-config"
+}
