@@ -13,7 +13,11 @@ const server = http.createServer((req, res) => {
   return res.end("ok");
 });
 
-server.listen(8080);
+const PORT = parseInt(process.env.PORT ?? "8080", 10);
+
+server.listen(PORT).on("listening", () => {
+  console.log(`Server listening on port ${PORT}`);
+});
 
 const bot = hambot({
   token: env.DISCORD_TOKEN,
