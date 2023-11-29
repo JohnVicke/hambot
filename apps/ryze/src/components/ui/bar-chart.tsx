@@ -9,7 +9,7 @@ import {
 } from "recharts";
 
 interface BarChartProps<T> {
-  data: Array<T>;
+  data: T[];
   columnKey: keyof T extends string ? keyof T : never;
   rowKey: keyof T extends string ? keyof T : never;
   height: number | string;

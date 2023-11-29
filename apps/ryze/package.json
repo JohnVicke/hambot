@@ -68,9 +68,6 @@
   },
   "eslintConfig": {
     "root": true,
-    "projects": [
-      "./tsconfig.json"
-    ],
     "extends": [
       "@ham/eslint-config/base",
       "@ham/eslint-config/nextjs",

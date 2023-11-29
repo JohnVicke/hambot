@@ -1,4 +1,4 @@
-import { Crown, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 import {
   Tooltip,
