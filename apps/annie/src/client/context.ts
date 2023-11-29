@@ -1,10 +1,18 @@
 import type { db } from "@ham/db";
 
+import { Logger } from "../logger";
+
 type HamDb = typeof db;
 
-export function createContext({ db }: { db: HamDb }) {
+interface CreateContextOptions {
+  db: HamDb;
+  logger: Logger;
+}
+
+export function createContext({ db, logger }: CreateContextOptions) {
   return {
     db,
+    logger,
   };
 }
 

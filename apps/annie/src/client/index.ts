@@ -7,9 +7,10 @@ import {
   Routes,
 } from "discord.js";
 
-import { db } from "@ham/db";
+import { db, schema } from "@ham/db";
 
 import * as commands from "../commands";
+import { createLogger } from "../logger";
 import { createContext } from "./context";
 
 type HamCommand = (typeof commands)[keyof typeof commands];
@@ -25,7 +26,7 @@ export function hambot(options: HambotOptions) {
   const client = new Client({ intents: [GatewayIntentBits.Guilds] });
   const slashCommands = new Collection<HamCommandName, HamCommand>();
 
-  const ctx = createContext({ db });
+  const ctx = createContext({ db, logger: createLogger() });
 
   for (const command of Object.values(commands)) {
     slashCommands.set(command.name, command);
@@ -46,7 +47,13 @@ export function hambot(options: HambotOptions) {
     }
 
     try {
+      const now = performance.now();
       await command.execute({ interaction, ...ctx });
+      await db.insert(schema.botApiCommand).values({
+        command: command.name,
+      });
+      const elapsed = performance.now() - now;
+      ctx.logger.info(`Executed command: ${command.name} in ${elapsed} ms`);
     } catch (error) {
       await interaction.reply({
         content: "There was an error while executing this command!",
