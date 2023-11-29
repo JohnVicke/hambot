@@ -1,9 +1,11 @@
 if (!process.env.DISCORD_CLIENT_ID) {
-  throw new Error("DISCORD_CLIENT_ID is not set");
+  console.error("DISCORD_CLIENT_ID is not set");
+  process.exit(1);
 }
 
 if (!process.env.DISCORD_TOKEN) {
-  throw new Error("DISCORD_TOKEN is not set");
+  console.error("DISCORD_TOKEN is not set");
+  process.exit(1);
 }
 
 export const env = {
