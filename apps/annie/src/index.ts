@@ -3,14 +3,14 @@ import http from "http";
 import { hambot } from "./client";
 import { env } from "./env";
 
+// https://fly.io/docs/reference/configuration/#the-checks-section
 const server = http.createServer((req, res) => {
   if (req.url === "/healthcheck") {
     res.writeHead(200, { "Content-Type": "text/plain" });
-    res.end("Im alive");
-    return;
+    return res.end("Im alive");
   }
   res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("ok");
+  return res.end("ok");
 });
 
 server.listen(8080);
