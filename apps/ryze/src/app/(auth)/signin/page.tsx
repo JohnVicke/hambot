@@ -2,8 +2,8 @@ import React from "react";
 import { redirect } from "next/navigation";
 import { getProviders } from "next-auth/react";
 
-import { ProviderSignIn } from "~/components/auth/provider-sign-in";
 import { getServerAuthSession } from "~/server/auth";
+import { ProviderSignIn } from "../_components/provider-sign-in";
 
 export default async function SigninPage() {
   const session = await getServerAuthSession();

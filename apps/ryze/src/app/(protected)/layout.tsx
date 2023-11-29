@@ -1,8 +1,8 @@
 import React from "react";
 import { redirect } from "next/navigation";
 
-import { Navbar } from "~/components/navbar";
 import { getServerAuthSession } from "~/server/auth";
+import { Navbar } from "./_components/navbar";
 
 export default async function DashboardLayout(props: React.PropsWithChildren) {
   const session = await getServerAuthSession();

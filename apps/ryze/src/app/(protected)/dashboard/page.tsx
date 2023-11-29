@@ -1,5 +1,5 @@
-import { CommandsRanCard } from "~/components/dashboard/hambot-api-overview/commands-ran-card";
-import { UserManagmentCard } from "~/components/dashboard/user-managment-card";
+import { CommandsRanCard } from "./_components/hambot-api-overview/commands-ran-card";
+import { UserManagmentCard } from "./_components/user-managment-card";
 
 export default function Page() {
   return (

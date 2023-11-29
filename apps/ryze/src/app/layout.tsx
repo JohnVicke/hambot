@@ -4,8 +4,8 @@ import { cookies } from "next/headers";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { ThemeProvider } from "~/components/theme-provider";
 import { TRPCReactProvider } from "~/trpc/react";
+import { ThemeProvider } from "./_components/theme-provider";
 
 export const metadata = {
   title: "HAMBOT",
