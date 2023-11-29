@@ -1,6 +1,9 @@
 "use client";
 
+import { Check, Copy, Wrench } from "lucide-react";
+
 import { useCopyToClipboard } from "~/hooks/use-copy-to-clipboard";
+import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -15,7 +18,7 @@ export function CopyInviteLink() {
       return;
     }
 
-    copy(mutation.data);
+    copy(`${window.location.origin}/sign-up/${mutation.data}`);
   };
 
   return (
@@ -30,10 +33,21 @@ export function CopyInviteLink() {
         readOnly
       />
       <Button
-        className="min-w-[8rem] shrink-0"
+        className={cn(
+          "inline-flex min-w-[9rem] shrink-0 items-center space-x-2 transition-all",
+        )}
         onClick={copyOrGenerate}
         variant="secondary"
       >
+        {mutation.data ? (
+          copied ? (
+            <Check className="mr-2 h-4 w-4" />
+          ) : (
+            <Copy className="mr-2 h-4 w-4" />
+          )
+        ) : (
+          <Wrench className="mr-2 h-4 w-4" />
+        )}
         {mutation.data ? (copied ? "Copied" : "Copy") : "Generate"} Link
       </Button>
     </div>

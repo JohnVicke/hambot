@@ -1,5 +1,7 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+import { createdAt } from "../utils/timestamp";
 
 export const factions = sqliteTable("faction", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
@@ -12,7 +14,7 @@ export const games = sqliteTable("game", {
     .notNull()
     .references(() => factions.id, { onDelete: "cascade" }),
   win: integer("win", { mode: "boolean" }).notNull(),
-  timestamp: text("timestamp").default(sql`CURRENT_TIMESTAMP`),
+  createdAt,
 });
 
 export const factionsRelations = relations(factions, ({ many }) => ({

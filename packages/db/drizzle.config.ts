@@ -14,7 +14,7 @@ if (!process.env.DATABASE_TOKEN) {
 }
 
 export default {
-  schema: "./src/server/db/schema",
+  schema: "./src/schema",
   driver: "turso",
   dbCredentials: {
     url: process.env.DATABASE_URL,

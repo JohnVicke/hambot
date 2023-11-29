@@ -23,7 +23,6 @@ export const randomFactionCommand = createSlashCommand({
   description: "Get a random globe-trotter faction!",
   execute: async ({ interaction }) => {
     const faction = getRandomFaction();
-    console.log(faction);
     await interaction.reply({ embeds: [getFactionEmbed(faction)] });
   },
 });

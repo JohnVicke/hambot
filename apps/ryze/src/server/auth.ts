@@ -27,6 +27,11 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
+  pages: {
+    signIn: "/signin",
+    signOut: "/signout",
+    newUser: "/new-user",
+  },
   adapter: DrizzleAdapter(db),
   providers: [
     DiscordProvider({
