@@ -3,7 +3,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { users } from "./auth";
 
-export const inviteLinks = sqliteTable("invite-link", {
+export const inviteLinks = sqliteTable("invite_link", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   inviterId: text("inviter_id")
     .notNull()
