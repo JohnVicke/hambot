@@ -3,10 +3,10 @@ import http from "http";
 import type { Context } from "../client/context";
 
 interface HambotServerOptions {
-  context: Context;
+  ctx: Context;
 }
 
-export function hambotHttpServer({ context }: HambotServerOptions) {
+export function hambotHttpServer({ ctx }: HambotServerOptions) {
   const server = http.createServer((req, res) => {
     if (req.url === "/healthcheck") {
       res.writeHead(200, { "Content-Type": "text/plain" });
@@ -21,7 +21,7 @@ export function hambotHttpServer({ context }: HambotServerOptions) {
   return {
     start: () => {
       server.listen(PORT).on("listening", () => {
-        context.logger.info(`Server listening on port ${PORT}`);
+        ctx.logger.info(`Server listening on port ${PORT}`);
       });
     },
   };

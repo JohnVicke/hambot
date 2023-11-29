@@ -1,11 +1,9 @@
 import type { db } from "@ham/db";
 
-import { Logger } from "../logger";
-
-type HamDb = typeof db;
+import type { Logger } from "../logger";
 
 interface CreateContextOptions {
-  db: HamDb;
+  db: typeof db;
   logger: Logger;
 }
 

@@ -8,7 +8,6 @@ const app = hambotApp({
 
 try {
   await app.bot.refreshCommands();
-  console.log("Successfully registered commands");
 } catch (e) {
   console.error(e);
   process.exit(1);

@@ -18,11 +18,11 @@ type HamCommandName = HamCommand["name"];
 interface HambotOptions {
   token: string;
   clientId: string;
-  context: Context;
+  ctx: Context;
 }
 
 export function hambotClient(options: HambotOptions) {
-  const { context } = options;
+  const { ctx } = options;
   const rest = new REST({ version: "10" }).setToken(options.token);
   const client = new Client({ intents: [GatewayIntentBits.Guilds] });
   const slashCommands = new Collection<HamCommandName, HamCommand>();
@@ -32,7 +32,7 @@ export function hambotClient(options: HambotOptions) {
   }
 
   client.on(Events.ClientReady, () => {
-    context.logger.info(`Logged in as ${client.user?.tag}!`);
+    ctx.logger.info(`Logged in as ${client.user?.tag}!`);
   });
 
   client.on(Events.InteractionCreate, async (interaction) => {
@@ -47,12 +47,12 @@ export function hambotClient(options: HambotOptions) {
 
     try {
       const now = performance.now();
-      await command.execute({ interaction, ...options.context });
-      await context.db.insert(schema.botApiCommand).values({
+      await command.execute({ interaction, ...options.ctx });
+      await ctx.db.insert(schema.botApiCommand).values({
         command: command.name,
       });
       const elapsed = performance.now() - now;
-      options.context.logger.info(
+      options.ctx.logger.info(
         `Executed command: ${command.name} in ${elapsed} ms`,
       );
     } catch (error) {
@@ -66,9 +66,7 @@ export function hambotClient(options: HambotOptions) {
   return {
     refreshCommands: async () => {
       for (const command of slashCommands.values()) {
-        context.logger.info(
-          `refreshing: ${command.name} - ${command.description}`,
-        );
+        ctx.logger.info(`refreshing: ${command.name} - ${command.description}`);
       }
       return rest.put(Routes.applicationCommands(options.clientId), {
         body: slashCommands.map((command) => command.register()),
