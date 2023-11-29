@@ -18,9 +18,11 @@ jobs:
         with:
           workspace: "@ham/annie"
           from: HEAD^1
-      - name: Deploy fly
+      - name: Setup Fly
         if: steps.changedAction.outputs.changed == 'true'
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - name: Deploy @ham/annie to Fly using Docker
+        run: flyctl deploy --remote-only
+        if: steps.changedAction.outputs.changed == 'true'
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
