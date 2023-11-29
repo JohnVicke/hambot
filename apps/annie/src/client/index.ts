@@ -7,11 +7,10 @@ import {
   Routes,
 } from "discord.js";
 
-import { db, schema } from "@ham/db";
+import { schema } from "@ham/db";
 
 import * as commands from "../commands";
-import { createLogger } from "../logger";
-import { createContext } from "./context";
+import type { Context } from "./context";
 
 type HamCommand = (typeof commands)[keyof typeof commands];
 type HamCommandName = HamCommand["name"];
@@ -19,21 +18,21 @@ type HamCommandName = HamCommand["name"];
 interface HambotOptions {
   token: string;
   clientId: string;
+  context: Context;
 }
 
-export function hambot(options: HambotOptions) {
+export function hambotClient(options: HambotOptions) {
+  const { context } = options;
   const rest = new REST({ version: "10" }).setToken(options.token);
   const client = new Client({ intents: [GatewayIntentBits.Guilds] });
   const slashCommands = new Collection<HamCommandName, HamCommand>();
-
-  const ctx = createContext({ db, logger: createLogger() });
 
   for (const command of Object.values(commands)) {
     slashCommands.set(command.name, command);
   }
 
   client.on(Events.ClientReady, () => {
-    console.log(`Logged in as ${client.user?.tag}!`);
+    context.logger.info(`Logged in as ${client.user?.tag}!`);
   });
 
   client.on(Events.InteractionCreate, async (interaction) => {
@@ -48,12 +47,14 @@ export function hambot(options: HambotOptions) {
 
     try {
       const now = performance.now();
-      await command.execute({ interaction, ...ctx });
-      await db.insert(schema.botApiCommand).values({
+      await command.execute({ interaction, ...options.context });
+      await context.db.insert(schema.botApiCommand).values({
         command: command.name,
       });
       const elapsed = performance.now() - now;
-      ctx.logger.info(`Executed command: ${command.name} in ${elapsed} ms`);
+      options.context.logger.info(
+        `Executed command: ${command.name} in ${elapsed} ms`,
+      );
     } catch (error) {
       await interaction.reply({
         content: "There was an error while executing this command!",
@@ -64,11 +65,11 @@ export function hambot(options: HambotOptions) {
 
   return {
     refreshCommands: async () => {
-      console.info("\n--- Refreshing commands --- ");
       for (const command of slashCommands.values()) {
-        console.info(`${command.name} - ${command.description}`);
+        context.logger.info(
+          `refreshing: ${command.name} - ${command.description}`,
+        );
       }
-      console.log("----------------------------\n");
       return rest.put(Routes.applicationCommands(options.clientId), {
         body: slashCommands.map((command) => command.register()),
       });
