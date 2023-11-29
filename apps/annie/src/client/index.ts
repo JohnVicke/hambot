@@ -1,6 +1,7 @@
 import {
   Client,
   Collection,
+  DiscordjsError,
   Events,
   GatewayIntentBits,
   REST,
@@ -46,8 +47,8 @@ export function hambotClient(options: HambotOptions) {
     }
 
     try {
+      await interaction.deferReply({ ephemeral: false });
       const now = performance.now();
-      await command.execute({ interaction, ...options.ctx });
       await ctx.db.insert(schema.botApiCommand).values({
         command: command.name,
       });
@@ -55,11 +56,19 @@ export function hambotClient(options: HambotOptions) {
       options.ctx.logger.info(
         `Executed command: ${command.name} in ${elapsed} ms`,
       );
+      await command.execute({ interaction, ...options.ctx });
     } catch (error) {
-      await interaction.reply({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
+      ctx.logger.error(`Error executing command: ${command.name}`);
+
+      if (error instanceof DiscordjsError) {
+        ctx.logger.error(`DiscordjsError: ${error.message}`);
+        await interaction.followUp({
+          content: "There was an error while executing this command!",
+          ephemeral: true,
+        });
+      } else {
+        ctx.logger.error(error);
+      }
     }
   });
 

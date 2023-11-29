@@ -4,6 +4,6 @@ export const pingCommand = createSlashCommand({
   name: "ping",
   description: "Ping command!",
   execute: async ({ interaction }) => {
-    await interaction.reply("Pong!");
+    await interaction.followUp({ content: "Pong!" });
   },
 });
