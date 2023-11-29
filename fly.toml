@@ -25,6 +25,5 @@ primary_region = "arn"
     interval = "15s"
     method = "get"
     path = "/healthcheck"
-    port = 8080
     timeout = "10s"
     type = "http"
