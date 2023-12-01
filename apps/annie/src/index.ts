@@ -7,6 +7,7 @@ import { createLogger } from "./logger";
 const logger = createLogger();
 
 const app = hambotApp({
+  httpPort: env.PORT,
   discordToken: env.DISCORD_TOKEN,
   discordClientId: env.DISCORD_CLIENT_ID,
   logger,

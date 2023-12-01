@@ -17,25 +17,25 @@
   },
   "scripts": {
     "build": "tsup",
+    "dev": "tsup --watch",
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore"
   },
   "license": "MIT",
-  "dependencies": {
-    "socket.io": "^4.7.2"
-  },
   "devDependencies": {
     "@ham/eslint-config": "workspace:^0.1.0",
     "@ham/prettier-config": "workspace:^0.1.0",
     "@ham/tsconfig": "workspace:^0.1.0",
+    "@socket.io/component-emitter": "^3.1.0",
     "eslint": "^8.54.0",
     "prettier": "^3.1.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "tsup": "^8.0.1",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
-    "root": true,
     "extends": [
       "@ham/eslint-config/base"
     ]

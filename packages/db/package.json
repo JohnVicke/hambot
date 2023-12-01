@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "pnpm run studio",
+    "dev": "pnpm run studio & pnpm run build --watch",
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
     "format": "prettier --check . --ignore-path ../../.gitignore",

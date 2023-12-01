@@ -11,4 +11,5 @@ if (!process.env.DISCORD_TOKEN) {
 export const env = {
   DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
   DISCORD_TOKEN: process.env.DISCORD_TOKEN,
+  PORT: parseInt(process.env.PORT ?? "8080", 10),
 };

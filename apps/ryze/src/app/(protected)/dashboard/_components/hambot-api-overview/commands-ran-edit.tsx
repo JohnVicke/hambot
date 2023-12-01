@@ -14,6 +14,7 @@ export function CommandsRanEdit() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
+            disabled
             variant="secondary"
             className="inline-flex items-center space-x-1"
           >

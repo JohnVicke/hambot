@@ -1,4 +1,3 @@
-import { BarChart } from "~/components/ui/bar-chart";
 import {
   Card,
   CardContent,
@@ -8,9 +7,10 @@ import {
 } from "~/components/ui/card";
 import { api } from "~/trpc/server";
 import { CommandsRanEdit } from "./commands-ran-edit";
+import { RequestsBarChart } from "./requsts-bar-chart";
 
 export async function CommandsRanCard(props: { className?: string }) {
-  const requests = await api.apiStats.overview.query();
+  const initialRequests = await api.apiStats.overview.query();
   return (
     <Card className={props.className}>
       <CardHeader className="grid grid-cols-[1fr_80px] items-start gap-4 space-y-0">
@@ -23,13 +23,7 @@ export async function CommandsRanCard(props: { className?: string }) {
         <CommandsRanEdit />
       </CardHeader>
       <CardContent>
-        <BarChart
-          width="100%"
-          height={350}
-          data={requests}
-          rowKey="command"
-          columnKey="count"
-        />
+        <RequestsBarChart initialData={initialRequests} />
       </CardContent>
     </Card>
   );

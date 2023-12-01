@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import NextImage from "next/image";
 
 import { ThemeToggle } from "./theme-toggle";
+import { WsConnectionStatus } from "./ws-connection";
 
 export function Navbar() {
   return (
@@ -16,7 +18,10 @@ export function Navbar() {
         />
         <p className="font-bold">@ham/ryze</p>
       </div>
-      <ThemeToggle />
+      <div className="flex items-center space-x-4">
+        <WsConnectionStatus />
+        <ThemeToggle />
+      </div>
     </header>
   );
 }

@@ -56,6 +56,7 @@ export function hambotClient(options: HambotOptions) {
       options.ctx.logger.info(
         `Executed command: ${command.name} in ${elapsed} ms`,
       );
+      ctx.ws.emit("executedCommand", command.name);
       await command.execute({ interaction, ...options.ctx });
     } catch (error) {
       ctx.logger.error(`Error executing command: ${command.name}`);
