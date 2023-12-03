@@ -2,17 +2,17 @@
 
 import React from "react";
 
-import { createWsClient } from "@ham/ws/client";
+import type { createWsClient } from "@ham/ws/client";
 
 import { api } from "~/trpc/react";
 import { io } from "./socket";
 
 type WsClient = ReturnType<typeof createWsClient>;
 
-type RealtimeContextValue = {
+interface RealtimeContextValue {
   io: WsClient;
   connected: boolean;
-};
+}
 
 const RealtimeContext = React.createContext<RealtimeContextValue | null>(null);
 

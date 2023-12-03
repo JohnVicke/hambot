@@ -4,7 +4,9 @@ import { Button } from "~/components/ui/button";
 
 export default function HomePage() {
   return (
-    <div className="flex h-full  min-h-screen w-screen flex-col items-center justify-center">
+    <div className="prose mx-auto flex h-full min-h-screen w-screen flex-col items-center justify-center dark:prose-invert">
+      <h1>@hambot</h1>
+      <p>hello world</p>
       <NextImage
         className="rounded-full"
         priority
