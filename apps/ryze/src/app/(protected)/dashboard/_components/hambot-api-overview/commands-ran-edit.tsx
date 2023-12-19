@@ -1,4 +1,7 @@
+"use client";
+
 import { Pen } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -7,14 +10,19 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import { useEditActions } from "~/stores/edit-store";
 
 export function CommandsRanEdit() {
+  const { toggleEditingCommands } = useEditActions();
+  const session = useSession();
+  console.log({ session });
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
-            disabled
+            disabled={session?.data?.user.role !== "admin"}
+            onClick={toggleEditingCommands}
             variant="secondary"
             className="inline-flex items-center space-x-1"
           >

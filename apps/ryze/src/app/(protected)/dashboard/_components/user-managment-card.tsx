@@ -39,12 +39,12 @@ export async function UserManagmentCard(props: { className?: string }) {
             className="flex items-center justify-between space-x-2"
             key={user.id}
           >
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 truncate">
               <Avatar>
                 {user.image && <AvatarImage src={user.image} />}
                 <AvatarFallback>{user.name?.[0]}</AvatarFallback>
               </Avatar>
-              <p className="flex flex-col">
+              <p className="flex flex-col text-ellipsis">
                 {user.email} <span className="font-medium">{user.name}</span>
               </p>
             </div>

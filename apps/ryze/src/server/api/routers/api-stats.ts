@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 
 import { eq, gt, schema, sql } from "@ham/db";
 
@@ -11,6 +12,7 @@ export const apiStatsRouter = createTRPCRouter({
         .select({
           command: schema.botApiCommand.command,
           count: sql<number>`count(${schema.botApiCommand.command})`,
+          id: schema.botApiCommand.id,
         })
         .from(schema.botApiCommand)
         .groupBy(schema.botApiCommand.command)
@@ -34,10 +36,36 @@ export const apiStatsRouter = createTRPCRouter({
           eq(schema.games.factionId, schema.factions.id),
         )
         .groupBy(schema.factions.name);
-      return winLoss;
+
+      return winLoss.map((wl) => {
+        const losses = wl.games - wl.wins;
+        const winPercentage = Math.round((wl.wins / (wl.wins + losses)) * 100);
+        const lossPercentage = Math.round((losses / (wl.wins + losses)) * 100);
+        return {
+          name: wl.name,
+          wins: wl.wins,
+          games: wl.games,
+          losses,
+          winPercentage,
+          lossPercentage,
+        };
+      });
     } catch (error) {
       console.log({ error });
       throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
     }
   }),
+  removeCommand: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const removeCommand = await ctx.db
+          .delete(schema.botApiCommand)
+          .where(eq(schema.botApiCommand.id, input.id));
+
+        return removeCommand.rowsAffected;
+      } catch (error) {
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      }
+    }),
 });

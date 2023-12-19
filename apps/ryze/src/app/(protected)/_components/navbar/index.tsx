@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import NextImage from "next/image";
 
 import { ThemeToggle } from "./theme-toggle";
@@ -16,7 +15,9 @@ export function Navbar() {
           width="40"
           height="40"
         />
-        <p className="font-bold">@ham/ryze</p>
+        <p className="bg-gradient-to-r from-sky-300 to-indigo-400 bg-clip-text font-bold text-transparent">
+          @ham/ryze
+        </p>
       </div>
       <div className="flex items-center space-x-4">
         <WsConnectionStatus />
