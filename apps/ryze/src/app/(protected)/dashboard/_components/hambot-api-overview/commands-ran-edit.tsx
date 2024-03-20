@@ -15,7 +15,6 @@ import { useEditActions } from "~/stores/edit-store";
 export function CommandsRanEdit() {
   const { toggleEditingCommands } = useEditActions();
   const session = useSession();
-  console.log({ session });
   return (
     <TooltipProvider>
       <Tooltip>

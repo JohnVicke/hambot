@@ -1,7 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 
 export function winEmbed(factionName: string, wins: number) {
-  console.log({ wins });
   return new EmbedBuilder()
     .setTitle(factionName)
     .setImage(

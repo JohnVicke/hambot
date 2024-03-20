@@ -11,7 +11,7 @@ import { and, eq, schema, sql } from "@ham/db";
 
 import { createSlashCommand } from "../create-slash-command";
 import { getRandomFaction } from "./get-random-faction";
-import { lossEmbed } from "./lossEmbed";
+import { lossEmbed } from "./loss-embed";
 import type { Faction } from "./types";
 import { winEmbed } from "./win-embed";
 
