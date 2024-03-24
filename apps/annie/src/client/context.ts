@@ -10,6 +10,7 @@ interface CreateContextOptions {
 }
 
 export function createContext({ db, logger, ws }: CreateContextOptions) {
+  console.log("db", db);
   return {
     db,
     ws,

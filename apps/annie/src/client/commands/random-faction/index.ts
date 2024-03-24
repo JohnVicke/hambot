@@ -122,7 +122,13 @@ export const randomFactionCommand = createSlashCommand({
             }
 
             await i.update({
-              embeds: [winEmbed(faction.name, wins[0].count)],
+              embeds: [
+                winEmbed({
+                  name: faction.name,
+                  wins: wins[0].count,
+                  losses: 1,
+                }),
+              ],
               components: [],
             });
             break;
@@ -166,7 +172,13 @@ export const randomFactionCommand = createSlashCommand({
               break;
             }
             await i.update({
-              embeds: [lossEmbed(faction.name)],
+              embeds: [
+                lossEmbed({
+                  name: faction.name,
+                  losses: losses[0].count,
+                  wins: 0,
+                }),
+              ],
               components: [],
             });
             break;

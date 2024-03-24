@@ -99,6 +99,7 @@ export const ionia = {
   champions: [
     "Ahri",
     "Akali",
+    "Hwei",
     "Irelia",
     "Ivern",
     "Jhin",
@@ -252,6 +253,7 @@ export const voidFaction = {
     "Kog'Maw",
     "Malzahar",
     "Rek'Sai",
+    "Smolder",
     "Vel'Koz",
   ],
 } satisfies Faction;
